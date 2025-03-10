@@ -1,15 +1,19 @@
 import express from "express"
 import dotenv from "dotenv"
 import { connectDB } from "./db/db.js";
+import productRouter from "./routes/product.routes.js";
 
 dotenv.config();
 
-const app = express();
-const PORT = process.env.PORT || 8002;
+const app = express()
 
-app.get("/", (req, res) => {
-    res.status(200).json("sever is ready");
-})
+// middleware
+app.use(express.json())
+
+// routes
+app.use("/api/products", productRouter)
+
+const PORT = process.env.PORT || 8002;
 
 // when connection is build with "async" with database it returns promises automatically. So, .then and .catch is required to handle the error.
 connectDB()
