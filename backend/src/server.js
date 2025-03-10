@@ -7,13 +7,14 @@ dotenv.config();
 
 const app = express()
 
+const PORT = process.env.PORT || 8002;
+
 // middleware
 app.use(express.json())
 
 // routes
 app.use("/api/products", productRouter)
 
-const PORT = process.env.PORT || 8002;
 
 // when connection is build with "async" with database it returns promises automatically. So, .then and .catch is required to handle the error.
 connectDB()
