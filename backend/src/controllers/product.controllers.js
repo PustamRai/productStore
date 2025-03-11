@@ -77,6 +77,13 @@ export const updateProduct = async (req, res) => {
                 message: "Invalid Id"
             })
         }
+
+        if (!name && !price && !image) {
+            return res.status(400).json({
+                success: false,
+                message: "Please provide at least one field to update",
+            });
+        }
     
         const updateProduct = await Product.findByIdAndUpdate(
             product_id,
@@ -88,7 +95,8 @@ export const updateProduct = async (req, res) => {
                 }
             },
             {
-                new: true
+                new: true,
+                runValidators: true //to ensure updates follow schema rules.
             }
         )
 
@@ -104,6 +112,38 @@ export const updateProduct = async (req, res) => {
         json({
             success: false,
             message: "error while updating product",
+            error: error.message
+        })
+    }
+}
+
+export const deleteProduct = async (req, res) => {
+    try {
+        const { product_id } = req.params
+    
+        const product = await Product.findById( product_id )
+        if(!product) {
+            return res.status(404).
+            json({
+                success: false,
+                message: "product not found"
+            })
+        }
+    
+        const deletedProduct = await Product.findByIdAndDelete( product_id )
+    
+        return res.status(200).
+        json({
+            success: true,
+            data: deletedProduct,
+            message: "product deleted successfully"
+        })
+    } catch (error) {
+        console.log("failed to delete product: ", error)
+        return res.status(500).
+        json({
+            success: false,
+            message: "internal server error",
             error: error.message
         })
     }
