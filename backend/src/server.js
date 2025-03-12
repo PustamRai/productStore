@@ -1,5 +1,6 @@
 import express from "express"
 import dotenv from "dotenv"
+import cors from "cors"
 import { connectDB } from "./db/db.js";
 import productRouter from "./routes/product.routes.js";
 
@@ -10,6 +11,13 @@ const app = express()
 const PORT = process.env.PORT || 8002;
 
 // middleware
+app.use(
+    cors({
+        origin: process.env.CORS_ORIGIN, 
+        methods: "GET,POST,PUT,DELETE",
+        credentials: true,
+    })
+)
 app.use(express.json())
 
 // routes
