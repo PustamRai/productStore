@@ -1,14 +1,31 @@
 import React, {useState} from 'react'
+import { toast } from "react-hot-toast"
+import { API } from '../api/API';
 
 function AddProduct() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [products, setProducts] = useState([])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Product added:", { name, price, imageUrl });
-    // Add your logic to send data to backend or update sstate
+    
+    try {
+      const response = await API.post("/addProduct", {
+        name,
+        price,
+        image: imageUrl
+      })
+
+      const newProduct = response.data.data
+      
+      setProducts(prevProducts => [...prevProducts, newProduct] )
+      console.log("new product: ", newProduct)
+      toast.success(response.data.message)
+    } catch (error) {
+      toast.error("failed to add product")
+    }
   };
 
   return (
