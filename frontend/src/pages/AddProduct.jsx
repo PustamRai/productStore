@@ -1,16 +1,19 @@
 import React, {useState} from 'react'
 import { toast } from "react-hot-toast"
 import { API } from '../api/API';
+import { useNavigate } from 'react-router-dom';
+import { useProductContext } from '../context/productContext';
 
 function AddProduct() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [products, setProducts] = useState([])
+
+  const navigate = useNavigate()
+  const { addProduct } = useProductContext()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     try {
       const response = await API.post("/addProduct", {
         name,
@@ -19,10 +22,9 @@ function AddProduct() {
       })
 
       const newProduct = response.data.data
-      
-      setProducts(prevProducts => [...prevProducts, newProduct] )
-      console.log("new product: ", newProduct)
+      addProduct(newProduct)
       toast.success(response.data.message)
+      navigate("/")
     } catch (error) {
       toast.error("failed to add product")
     }

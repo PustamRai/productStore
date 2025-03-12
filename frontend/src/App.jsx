@@ -1,19 +1,22 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ProductProvider } from "./context/productContext";
 import Navbar from "./components/Navbar";
 import AddProduct from "./pages/AddProduct";
-
+import ProductCard from "./pages/ProductCard";
 
 function App() {
   return (
     <div>
-      <Router>
-      <Navbar />
-        <Routes>
-          {/* <Route path="/" /> */}
-          <Route path="/add-product" element={ <AddProduct /> } />
-        </Routes>
-      </Router>
+      <ProductProvider>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<ProductCard />} />
+            <Route path="/add-product" element={<AddProduct />} />
+          </Routes>
+        </Router>
+      </ProductProvider>
     </div>
   );
 }
