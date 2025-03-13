@@ -31,8 +31,20 @@ export const ProductProvider = ({ children }) => {
     setProducts((prevProducts) => [...prevProducts, products]);
   };
 
+  // function to delete the product
+  const deleteProduct = async (id) => {
+    try {
+      const response = await API.post(`/deleteProduct/${id}`)
+      setProducts((prevProducts) => prevProducts.filter((product) => product.id !== id))
+      toast.success(response.data.message)
+    } catch (error) {
+      console.log("failed to delete product: ", error)
+      toast.error("failed to delete product")
+    }
+  }
+
   return (
-    <ProductContext.Provider value={{ products, addProduct }}>
+    <ProductContext.Provider value={{ products, addProduct, deleteProduct }}>
       {children}
     </ProductContext.Provider>
   );

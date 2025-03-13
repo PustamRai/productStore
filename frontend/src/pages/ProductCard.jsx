@@ -5,9 +5,8 @@ import { FiEdit2 } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 function ProductCard() {
-  const { products } = useProductContext();
+  const { products, deleteProduct } = useProductContext();
 
-  console.log("product in UI: ", products);
   return (
     <div className="bg-gray-900 min-h-screen py-10 px-6">
       <div className="container mx-auto">
@@ -37,7 +36,9 @@ function ProductCard() {
 
                 <div className="flex gap-4 px-3 pb-3">
                   <FiEdit2 className="bg-blue-500 rounded-xl p-2 text-4xl cursor-pointer hover:bg-blue-600 transition-all duration-200 ease-in" />
-                  <RiDeleteBin6Line className="bg-red-500 rounded-xl p-2 text-4xl cursor-pointer hover:bg-red-600 transition-all duration-200 ease-in" />
+                  <RiDeleteBin6Line 
+                  onClick={() => deleteProduct(product._id)}
+                  className="bg-red-500 rounded-xl p-2 text-4xl cursor-pointer hover:bg-red-600 transition-all duration-200 ease-in" />
                 </div>
               </div>
             ))}
