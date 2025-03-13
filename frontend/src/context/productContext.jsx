@@ -15,7 +15,7 @@ export const ProductProvider = ({ children }) => {
         const response = await API.get("/allProducts");
         const allProducts = response.data.data
 
-        setProducts((prevProducts) => [...prevProducts, allProducts])
+        setProducts(allProducts)
         toast.success(response.data.message);
       } catch (error) {
         toast.error("error in fetching data");

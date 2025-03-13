@@ -16,7 +16,7 @@ function Navbar() {
         to="/add-product"
         >
           <button
-            className="p-2 rounded-md bg-blue-700 text-gray-200"
+            className="p-2 rounded-md bg-blue-700 text-gray-200 cursor-pointer"
             
           >
             <FaPlus className=" rounded-2xl" />
