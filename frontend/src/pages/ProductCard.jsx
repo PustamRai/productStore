@@ -8,7 +8,7 @@ function ProductCard() {
   const { products, deleteProduct } = useProductContext();
 
   return (
-    <div className="bg-gray-900 min-h-screen py-10 px-6">
+    <div className="bg-gray-900 min-h-screen py-10 px-6 md:px-52">
       <div className="container mx-auto">
         <h2 className="text-2xl font-bold text-blue-400 mb-8 flex items-center">
           🚀 Current Products
