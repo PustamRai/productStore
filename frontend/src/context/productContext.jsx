@@ -31,11 +31,27 @@ export const ProductProvider = ({ children }) => {
     setProducts((prevProducts) => [...prevProducts, products]);
   };
 
+
+  const updateProduct = async (id, updatedData) => {
+    try {
+      const response = await API.post(`/updateProduct/${id}`, updatedData);
+      setProducts((prevProducts) =>
+        prevProducts.map((product) =>
+          product._id === id ? { ...product, ...updatedData } : product
+        )
+      );
+      toast.success(response.data.message);
+    } catch (error) {
+      toast.error("Failed to update product");
+    }
+  };
+
+
   // function to delete the product
   const deleteProduct = async (id) => {
     try {
       const response = await API.post(`/deleteProduct/${id}`)
-      setProducts((prevProducts) => prevProducts.filter((product) => product.id !== id))
+      setProducts((prevProducts) => prevProducts.filter((product) => product._id !== id))
       toast.success(response.data.message)
     } catch (error) {
       console.log("failed to delete product: ", error)
@@ -44,7 +60,7 @@ export const ProductProvider = ({ children }) => {
   }
 
   return (
-    <ProductContext.Provider value={{ products, addProduct, deleteProduct }}>
+    <ProductContext.Provider value={{ products, addProduct, updateProduct, deleteProduct }}>
       {children}
     </ProductContext.Provider>
   );
