@@ -1,32 +1,41 @@
-import React, {useState} from 'react'
-import { toast } from "react-hot-toast"
-import { API } from '../api/API';
-import { useNavigate } from 'react-router-dom';
-import { useProductContext } from '../context/productContext';
+import React, { useState } from "react";
+import { toast } from "react-hot-toast";
+import { API } from "../api/API";
+import { useNavigate } from "react-router-dom";
+import { useProductContext } from "../context/productContext";
 
 function AddProduct() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageFile, setImageFile] = useState(null);
 
-  const navigate = useNavigate()
-  const { addProduct } = useProductContext()
+  const navigate = useNavigate();
+  const { addProduct } = useProductContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await API.post("/addProduct", {
-        name,
-        price,
-        image: imageUrl
-      })
 
-      const newProduct = response.data.data
-      addProduct(newProduct)
-      toast.success(response.data.message)
-      navigate("/")
+    if (!imageFile) {
+      toast.error("Please select an image");
+      return;
+    }
+  
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("price", price);
+    formData.append("image", imageFile);
+
+    try {
+      const response = await API.post("/addProduct", formData, {
+        headers: { "Content-Type": "multipart/form-data" }, 
+      });
+
+      const newProduct = response.data.data;
+      addProduct(newProduct);
+      toast.success(response.data.message);
+      navigate("/");
     } catch (error) {
-      toast.error("failed to add product")
+      toast.error("failed to add product");
     }
   };
 
@@ -36,7 +45,11 @@ function AddProduct() {
         <h2 className="text-white text-lg font-semibold text-center mb-4">
           Create New Product
         </h2>
-        <form onSubmit={handleSubmit}>
+
+        <form 
+        onSubmit={handleSubmit} 
+        encType="multipart/form-data"
+        >
           <input
             type="text"
             name="name"
@@ -56,24 +69,22 @@ function AddProduct() {
             required
           />
           <input
-            type="text"
+            type="file"
             name="imageUrl"
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
-            placeholder="Image URL"
-            className="w-full p-2 mb-3 bg-gray-700 text-white rounded outline-none focus:ring-2 focus:ring-blue-400"
+            onChange={(e) => setImageFile(e.target.files[0])} 
+            className="w-full p-2 mb-3 bg-gray-700 text-white rounded cursor-pointer"
             required
           />
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition"
+            className="w-full pt-2 bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition"
           >
             Add Product
           </button>
         </form>
       </div>
     </div>
-  )
+  );
 }
 
-export default AddProduct
+export default AddProduct;

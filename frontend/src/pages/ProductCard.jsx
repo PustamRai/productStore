@@ -107,7 +107,7 @@ function ProductCard() {
                       </p>
                     </div>
 
-                    <div className="flex gap-4 mt-2 px-2 py-3">
+                    <div className="flex justify-between gap-4 mt-2 px-2 py-3">
                       <FiEdit2
                         onClick={() => handleEdit(product)}
                         className="bg-blue-500 rounded-xl p-2 text-4xl cursor-pointer hover:bg-blue-600 transition-all duration-200 ease-in"
