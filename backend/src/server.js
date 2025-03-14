@@ -10,6 +10,10 @@ const app = express()
 
 const PORT = process.env.PORT || 8002;
 
+app.get("/", (req, res) => {
+    res.send("product store ");
+});
+
 // middleware
 app.use(
     cors({
@@ -36,4 +40,5 @@ connectDB()
     console.error("connection to mongodDB failed...", error.message)
     process.exit(1) // process code 1 means exit with failure, 0 means success
 })
+
 
