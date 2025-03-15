@@ -4,7 +4,6 @@ import fs from "fs"
 
 dotenv.config(); 
 
-
     // configuration
     cloudinary.config({
         cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -21,8 +20,8 @@ dotenv.config();
                 resource_type: "auto"
             });
             
-            // console.log("file successfully uploaded on cloudinary", uploadResult.url);
-            // console.log("uploadResult :", uploadResult);
+            console.log("file successfully uploaded on cloudinary", uploadResult.url);
+            console.log("uploadResult :", uploadResult);
             fs.unlinkSync(localFilePath);
             return uploadResult;
         } catch (error) {

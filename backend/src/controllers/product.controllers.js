@@ -38,10 +38,10 @@ export const addProduct = async (req, res) => {
       });
     }
 
-    // creating avatar and imageCover and checking avatar
+    // creating image and checking image
     const imageLocalPath = req.files?.image?.[0]?.path; // ".files" is coming from multer
 
-    // console.log("req files: ", req.files);
+    console.log("req files: ", req.files);
 
     if (!imageLocalPath) {
       return res.status(400).json({
@@ -53,7 +53,7 @@ export const addProduct = async (req, res) => {
     // Upload image to Cloudinary
     const uploadResult = await uploadOnCloudinary(imageLocalPath);
 
-    // console.log("upload result: ", uploadResult)
+    console.log("upload result: ", uploadResult)
 
     if (!uploadResult || !uploadResult.url) {
       return res.status(400).json({
