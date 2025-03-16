@@ -7,6 +7,7 @@ const ProductContext = createContext();
 // create provider
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // fetch products from backend
   useEffect(() => {
@@ -19,6 +20,8 @@ export const ProductProvider = ({ children }) => {
         toast.success(response.data.message);
       } catch (error) {
         toast.error("error in fetching data");
+      } finally {
+        setLoading(false); 
       }
     }
 
@@ -60,7 +63,7 @@ export const ProductProvider = ({ children }) => {
   }
 
   return (
-    <ProductContext.Provider value={{ products, addProduct, updateProduct, deleteProduct }}>
+    <ProductContext.Provider value={{ products, loading, addProduct, updateProduct, deleteProduct }}>
       {children}
     </ProductContext.Provider>
   );
