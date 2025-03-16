@@ -12,7 +12,7 @@ const router = Router()
 router.get("/allProducts", allProducts)
 
 // router.post("/addProduct", addProduct)
-router.post("/addProduct", upload.fields([{ name: "image", maxCount: 1 }]), addProduct);
+router.post("/addProduct", upload.single("image"), addProduct);
 
 router.post("/updateProduct/:product_id", updateProduct)
 router.post("/deleteProduct/:product_id", deleteProduct)

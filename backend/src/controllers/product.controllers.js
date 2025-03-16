@@ -39,9 +39,7 @@ export const addProduct = async (req, res) => {
     }
 
     // creating image and checking image
-    const imageLocalPath = req.files?.image?.[0]?.path; // ".files" is coming from multer
-
-    console.log("req files: ", req.files);
+    const imageLocalPath = req.file?.path // ".files" is coming from multer
 
     if (!imageLocalPath) {
       return res.status(400).json({
