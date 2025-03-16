@@ -10,7 +10,7 @@ function ProductCard() {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-800">
-        <div className="w-full max-w-lg p-6 bg-gray-800 rounded-md border border-blue-300">
+        <div className="w-full max-w-lg p-6 bg-gray-800 rounded-md">
           {/* First body section */}
           <div className="flex animate-pulse space-x-4">
             <div className="size-10 rounded-full bg-gray-600"></div>
