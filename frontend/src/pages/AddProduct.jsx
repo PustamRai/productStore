@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
-import { API } from "../api/API";
 import { useNavigate } from "react-router-dom";
 import { useProductContext } from "../context/productContext";
 
@@ -19,31 +18,19 @@ function AddProduct() {
       toast.error("Please select an image");
       return;
     }
-    
-    setLoading(true)
-  
+
+    setLoading(true);
+
     const formData = new FormData();
     formData.append("name", name);
     formData.append("price", price);
     formData.append("image", imageFile);
 
-    try {
-      const response = await API.post("/addProduct", formData, {
-        headers: { "Content-Type": "multipart/form-data" }, 
-      });
+    await addProduct(formData);
 
-      const newProduct = response.data.data;
-      addProduct(newProduct);
-      toast.success(response.data.message);
-      navigate("/");
-    } catch (error) {
-      // toast.error("failed to add product");
-      toast.error(error.response?.data?.message || "Failed to add product");
-    } finally {
-      setLoading(false)
-    }
+    navigate("/");
   };
-
+  
   return (
     <div className="flex justify-center min-h-screen bg-gray-900">
       <div className="bg-gray-900 px-6 py-15 rounded-lg shadow-lg w-2xl">
@@ -51,10 +38,7 @@ function AddProduct() {
           Create New Product
         </h2>
 
-        <form 
-        onSubmit={handleSubmit} 
-        encType="multipart/form-data"
-        >
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
           <input
             type="text"
             name="name"
@@ -76,7 +60,7 @@ function AddProduct() {
           <input
             type="file"
             name="imageFile"
-            onChange={(e) => setImageFile(e.target.files[0])} 
+            onChange={(e) => setImageFile(e.target.files[0])}
             className="w-full p-2 mb-3 bg-gray-700 text-white rounded cursor-pointer"
             required
           />
@@ -84,10 +68,11 @@ function AddProduct() {
             type="submit"
             disabled={loading}
             className={`w-full p-2 rounded text-white ${
-              loading ? "bg-gray-500 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
+              loading
+                ? "bg-gray-500 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700"
             }`}
           >
-            
             {loading ? "Adding product" : "Add Product"}
           </button>
         </form>

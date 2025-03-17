@@ -29,8 +29,20 @@ export const ProductProvider = ({ children }) => {
 
 
   // function to add a new product
-  const addProduct = (products) => {
-    setProducts((prevProducts) => [...prevProducts, products]);
+  const addProduct = async (productData) => {
+    try {
+      const response = await API.post("/addProduct", productData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      const newProduct = response.data.data;
+      setProducts((prevProducts) => [...prevProducts, newProduct]);
+      toast.success(response.data.message);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to add product");
+    } finally {
+      setLoading(false);
+    }
   };
 
 
