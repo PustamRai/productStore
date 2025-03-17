@@ -7,6 +7,9 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 function ProductCard() {
   const { products, loading, updateProduct, deleteProduct } = useProductContext();
 
+  const [editId, setEditId] = useState(null); 
+  const [formData, setFormData] = useState({ name: "", price: "", image: "" });
+
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-800">
@@ -46,9 +49,6 @@ function ProductCard() {
   }  
   
 
-  const [editId, setEditId] = useState(null); 
-  const [formData, setFormData] = useState({ name: "", price: "", image: "" });
-
   // Handle Edit Click
   const handleEdit = (product) => {
     setEditId(product._id); 
@@ -77,8 +77,8 @@ function ProductCard() {
 
   return (
     <div className="bg-gray-900 min-h-screen py-10 px-6 md:px-52">
-      <div className="container mx-auto">
-        <h2 className="text-2xl font-bold text-blue-400 mb-8 flex items-center">
+      <div className="container mx-auto ">
+        <h2 className="text-2xl font-bold text-blue-400 mb-8 flex justify-center items-center">
           🚀 Current Products
         </h2>
 
@@ -162,7 +162,7 @@ function ProductCard() {
             ))}
           </div>
         ) : (
-          <div className="flex gap-4">
+          <div className="flex justify-center items-center  gap-4">
             <h3 className="text-red-600">No products yet!!</h3>
             <NavLink to="/add-product">
               <span className="text-blue-500 underline">create a new one</span>
