@@ -17,7 +17,6 @@ export const ProductProvider = ({ children }) => {
         const allProducts = response.data.data
 
         setProducts(allProducts)
-        toast.success(response.data.message);
       } catch (error) {
         toast.error("error in fetching data");
       } finally {
