@@ -30,7 +30,7 @@ function AddProduct() {
 
     navigate("/");
   };
-  
+
   return (
     <div className="flex justify-center min-h-screen bg-gray-900">
       <div className="bg-gray-900 px-6 py-15 rounded-lg shadow-lg w-2xl">
@@ -73,7 +73,7 @@ function AddProduct() {
                 : "bg-blue-600 hover:bg-blue-700"
             }`}
           >
-            {loading ? "Adding product" : "Add Product"}
+            {loading ? "Adding product..." : "Add Product"}
           </button>
         </form>
       </div>
