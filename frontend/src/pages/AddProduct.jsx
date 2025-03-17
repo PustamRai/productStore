@@ -9,7 +9,7 @@ function AddProduct() {
   const [imageFile, setImageFile] = useState(null);
 
   const navigate = useNavigate();
-  const { addProduct, loading, setLoading } = useProductContext();
+  const { addProduct, loading } = useProductContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,8 +18,6 @@ function AddProduct() {
       toast.error("Please select an image");
       return;
     }
-
-    setLoading(true);
 
     const formData = new FormData();
     formData.append("name", name);
