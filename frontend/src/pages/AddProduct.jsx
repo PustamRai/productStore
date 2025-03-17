@@ -25,14 +25,10 @@ function AddProduct() {
     formData.append("price", price);
     formData.append("image", imageFile);
 
-    console.log("form data: ", formData)
-
     try {
       const response = await API.post("/addProduct", formData, {
         headers: { "Content-Type": "multipart/form-data" }, 
       });
-
-      console.log("res: ", response)
 
       const newProduct = response.data.data;
       addProduct(newProduct);

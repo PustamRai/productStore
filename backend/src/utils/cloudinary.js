@@ -19,11 +19,7 @@ dotenv.config();
             const uploadResult = await cloudinary.uploader.upload(localFilePath, {
                 resource_type: "auto"
             });
-
-            // file has been uploaded successfully
             
-            console.log("file successfully uploaded on cloudinary", uploadResult.url);
-            console.log("uploadResult :", uploadResult);
             fs.unlinkSync(localFilePath);
             return uploadResult;
         } catch (error) {
