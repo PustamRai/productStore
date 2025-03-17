@@ -47,7 +47,6 @@ function ProductCard() {
       </div>
     );
   }  
-  
 
   // Handle Edit Click
   const handleEdit = (product) => {

@@ -10,7 +10,7 @@ function AddProduct() {
   const [imageFile, setImageFile] = useState(null);
 
   const navigate = useNavigate();
-  const { addProduct } = useProductContext();
+  const { addProduct, loading, setLoading } = useProductContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,6 +19,8 @@ function AddProduct() {
       toast.error("Please select an image");
       return;
     }
+    
+    setLoading(true)
   
     const formData = new FormData();
     formData.append("name", name);
@@ -37,6 +39,8 @@ function AddProduct() {
     } catch (error) {
       // toast.error("failed to add product");
       toast.error(error.response?.data?.message || "Failed to add product");
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -78,9 +82,13 @@ function AddProduct() {
           />
           <button
             type="submit"
-            className="w-full pt-2 bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition cursor-pointer"
+            disabled={loading}
+            className={`w-full p-2 rounded text-white ${
+              loading ? "bg-gray-500 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
+            }`}
           >
-            Add Product
+            
+            {loading ? "Adding product" : "Add Product"}
           </button>
         </form>
       </div>
