@@ -5,7 +5,7 @@ import { FaPlus } from "react-icons/fa6";
 
 function Navbar() {
   return (
-    <nav className="bg-gray-900 text-white flex justify-between items-center px-6 py-4 md:px-52">
+    <nav className="text-black bg-gray-400 flex justify-between items-center px-6 py-4 md:px-52">
       <div className="flex items-center">
         <NavLink
         to="/"

@@ -30,7 +30,7 @@ function AddProduct() {
   };
 
   return (
-    <div className="flex justify-center min-h-screen bg-gray-900">
+    <div className="flex justify-center min-h-screen">
       <div className="bg-gray-900 px-6 py-15 rounded-lg shadow-lg w-2xl">
         <h2 className="text-white text-lg font-semibold text-center mb-4">
           Create New Product

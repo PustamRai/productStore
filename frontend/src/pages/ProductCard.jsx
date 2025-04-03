@@ -12,8 +12,8 @@ function ProductCard() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-gray-800">
-        <div className="w-full max-w-lg p-6 bg-gray-800 rounded-md">
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="w-full max-w-lg p-6 rounded-md">
           {/* First body section */}
           <div className="flex animate-pulse space-x-4">
             <div className="size-10 rounded-full bg-gray-600"></div>
@@ -75,7 +75,7 @@ function ProductCard() {
   };
 
   return (
-    <div className="bg-gray-900 min-h-screen py-10 px-6 md:px-52">
+    <div className="min-h-screen py-10 px-6 md:px-52">
       <div className="container mx-auto ">
         <h2 className="text-2xl font-bold text-blue-400 mb-8 flex justify-center items-center">
           🚀 Current Products

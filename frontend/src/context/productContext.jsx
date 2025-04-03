@@ -9,6 +9,8 @@ export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  console.log("store prod: ", products)
+
   // fetch products from backend
   useEffect(() => {
     const fetchProducts = async () => {

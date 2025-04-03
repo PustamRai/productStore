@@ -7,7 +7,7 @@ import ProductCard from "./pages/ProductCard";
 
 function App() {
   return (
-    <div>
+    <div className="bg-gray-300">
       <ProductProvider>
         <Router>
           <Navbar />
