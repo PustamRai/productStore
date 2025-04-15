@@ -30,9 +30,9 @@ function AddProduct() {
   };
 
   return (
-    <div className="flex justify-center min-h-screen">
-      <div className="bg-gray-900 px-6 py-15 rounded-lg shadow-lg w-2xl">
-        <h2 className="text-white text-lg font-semibold text-center mb-4">
+    <div className="flex justify-center mt-20 px-6">
+      <div className="bg-white px-6 py-15 rounded-lg shadow-lg w-auto  md:w-2xl">
+        <h2 className="text-gray-700 text-lg font-semibold text-center mb-4">
           Create New Product
         </h2>
 
@@ -43,7 +43,7 @@ function AddProduct() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Product Name"
-            className="w-full p-2 mb-3 bg-gray-700 text-white rounded outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full p-2 mb-3 border border-gray-400 text-gray-600 rounded outline-none focus:ring-2 focus:ring-blue-400"
             required
           />
           <input
@@ -52,14 +52,14 @@ function AddProduct() {
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             placeholder="Price"
-            className="w-full p-2 mb-3 bg-gray-700 text-white rounded outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full p-2 mb-3 border border-gray-400 text-gray-600 rounded outline-none focus:ring-2 focus:ring-blue-400"
             required
           />
           <input
             type="file"
             name="imageFile"
             onChange={(e) => setImageFile(e.target.files[0])}
-            className="w-full p-2 mb-3 bg-gray-700 text-white rounded cursor-pointer"
+            className="w-full p-2 mb-3 border border-gray-400 text-gray-600 rounded cursor-pointer"
             required
           />
           <button
