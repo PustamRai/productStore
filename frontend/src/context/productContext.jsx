@@ -32,6 +32,7 @@ export const ProductProvider = ({ children }) => {
 
   // function to add a new product
   const addProduct = async (productData) => {
+    setLoading(true)
     try {
       const response = await API.post("/addProduct", productData, {
         headers: { "Content-Type": "multipart/form-data" },

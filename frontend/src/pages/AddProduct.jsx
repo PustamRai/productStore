@@ -65,7 +65,7 @@ function AddProduct() {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full p-2 rounded text-white ${
+            className={`w-full p-2 rounded text-white cursor-pointer ${
               loading
                 ? "bg-gray-500 cursor-not-allowed"
                 : "bg-blue-600 hover:bg-blue-700"
